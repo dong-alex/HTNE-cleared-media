@@ -1,4 +1,4 @@
-import React from 'react';
+import React,  { useEffect, useState } from 'react';
 import { bool } from 'prop-types';
 import { StyledMenu } from './Menu.styled';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -27,14 +27,16 @@ const Menu = ({ open, ...props }) => {
   const [helperText, setHelperText] = React.useState('Search by...');
   const [radioText, setRadioText] = React.useState('Search by')
 
-
-  const handleChangeTypeInput = (event) => {
-    setValue(event.target.value);
+  useEffect(()=> {
     if (value === '@'){
       setHelperText(`Searching by user`);
     } else if (value === '#') {
       setHelperText(`Searching by hashtag`);
-    }
+    } 
+  },[value])
+
+  const handleChangeTypeInput = (event) => {
+    setValue(event.target.value);
     setError(false);
     console.log(`Changed the type: ${value}`)
     console.log(`This is helpertext: ${helperText}`)
@@ -106,10 +108,10 @@ const Menu = ({ open, ...props }) => {
 
   return (
     <StyledMenu open={open} aria-hidden={!isHidden} {...props}>
-      <a href="/" tabIndex={tabIndex}>
+      <h1>
         <span aria-hidden="true"></span>
         Twitter
-      </a>
+      </h1>
 
         <MuiThemeProvider theme={theme}>
           <FormControl component="fieldset" error={error}>
@@ -131,14 +133,14 @@ const Menu = ({ open, ...props }) => {
           </FormControl>
 
 
-      <a href="/" tabIndex={tabIndex}>
+      <h1>
         <span aria-hidden="true"></span>
         CNN
-        </a>
-      <a href="/" tabIndex={tabIndex}>
+        </h1>
+      <h1>
         <span aria-hidden="true"></span>
         FOX
-        </a>
+        </h1>
     </StyledMenu>
   )
 }

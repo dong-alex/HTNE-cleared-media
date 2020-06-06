@@ -46,7 +46,7 @@ export const StyledMenu = styled.nav`
       }
   }
 
-  a {
+  h1 {
     font-size: 2rem;
     text-transform: uppercase;
     padding: 2rem 0;
