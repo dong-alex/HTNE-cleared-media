@@ -8,7 +8,7 @@ import { Sidebar, Menu } from './components';
 function App() {
   const [open, setOpen] = useState(false);
   const node = useRef();
-  useOnClickOutside(node, () => setOpen(false));
+  //useOnClickOutside(node, () => setOpen(false));
   return (
     <ThemeProvider theme={theme}>
       <>
