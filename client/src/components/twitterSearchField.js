@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Layout from "./layout";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Select from "@material-ui/core/Select";
-import InputBase from "@material-ui/core/InputBase";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import IconButton from "@material-ui/core/IconButton";
 import Radio from "@material-ui/core/Radio";
@@ -90,39 +84,6 @@ const TwitterSearchField = ({ onSubmit }) => {
 	const handleSubmissionChange = (event) => {
 		setSubmission(event.target.value);
 	};
-
-	// const BootstrapInput = withStyles((theme) => ({
-	// 	root: {
-	// 		"label + &": {
-	// 			marginTop: theme.spacing(3),
-	// 		},
-	// 	},
-	// 	input: {
-	// 		borderRadius: 4,
-	// 		backgroundColor: theme.palette.background.paper,
-	// 		border: "1px solid #ced4da",
-	// 		padding: "10px 0px 10px 8px",
-	// 		transition: theme.transitions.create(["border-color", "box-shadow"]),
-	// 		// Use the system font instead of the default Roboto font.
-	// 		fontFamily: [
-	// 			"-apple-system",
-	// 			"BlinkMacSystemFont",
-	// 			'"Segoe UI"',
-	// 			"Roboto",
-	// 			'"Helvetica Neue"',
-	// 			"Arial",
-	// 			"sans-serif",
-	// 			'"Apple Color Emoji"',
-	// 			'"Segoe UI Emoji"',
-	// 			'"Segoe UI Symbol"',
-	// 		].join(","),
-	// 		"&:focus": {
-	// 			borderRadius: 4,
-	// 			borderColor: "#80bdff",
-	// 			boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
-	// 		},
-	// 	},
-	// }))(InputBase);
 
 	const theme = createMuiTheme({
 		palette: {

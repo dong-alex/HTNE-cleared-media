@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import { Sidebar, Menu } from "./";
 import Appbar from "./Appbar";
 import {
 	makeStyles,

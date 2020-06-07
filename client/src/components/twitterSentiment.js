@@ -1,12 +1,6 @@
 import React from 'react';
-import clsx from 'clsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { green, amber, red, grey} from '@material-ui/core/colors';
-import Button from '@material-ui/core/Button';
-import Fab from '@material-ui/core/Fab';
-import CheckIcon from '@material-ui/icons/Check';
-import SaveIcon from '@material-ui/icons/Save';
 import Avatar from '@material-ui/core/Avatar';
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Typography from "@material-ui/core/Typography";
