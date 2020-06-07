@@ -3,6 +3,7 @@ import Layout from "../layout";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import TwitterSearchField from "../twitterSearchField";
+import TwitterSentiment from "../twitterSentiment";
 import axios from "axios";
 import UserCard from "../userCard";
 
@@ -60,7 +61,8 @@ const TwitterPage = (props) => {
 					<Paper>{documentAnalysis.document_score}</Paper>
 				</>
 			)} */}
-			{twitterUser && <UserCard user={twitterUser} />}
+			
+			{twitterUser && <TwitterSentiment score={0} magnitude={0} /> && <UserCard user={twitterUser} />}
 		</Layout>
 	);
 };
