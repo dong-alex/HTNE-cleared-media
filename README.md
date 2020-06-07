@@ -1,17 +1,17 @@
 # HTNE-cleared-media
-HackTheNorthEast Project using NLP to analyze media content
+HackTheNorthEast Project using NLP to analyze and explore traditional and social media content. 
 
 Our client uses the following technologies:
 - React
 - Material-UI
 
-This client will be used to handle searching for tweets from users or tags. If given time, an interface to compare Fox and CNN news articles and examine their viewpoints. Fox is known to have conservative bias, so it would be interesting to see how these news networks portray their ideas on the same issue.
+The main goal of the project is to both showcase how people talk on social media but also how traditional media (e.x FOX and CNN) take about issues compared to each other. Providing some added clarity on how we consume media in our everyday lives
 
 ### Twitter
 
-Tweets are short posts and straight to the point. Popular figures express their thoughts online to their followers, but what kind of image are they trying to portray? Social media is the primary form of communication and sharing important events.
+Tweets are short posts and straight to the point. It is here where both popular and influential figures in our world can express their thoughts to their followers, but what kind of image are they trying to portray? Social media platforms, like Twitter, are playing a larger role in how we communicate and share important events.
 
-Natural Language Processing is a growing field in AI where machines try to learn and understand human language and extract important details about it. In this example, we practice **Opinion Mining**, or **Entity-Sentiment analysis**. Using Google's Natural Language API to extract information about a user's tweets, we can analyze their stance online. Based on their scores, we can classify this user or tag to be generally positive, negative, or neutral online.
+Natural Language Processing is a growing field in AI where machines try to learn and understand human language and extract important details about it. In this example, we practice **Opinion Mining**, or **Entity-Sentiment analysis**. Using Google's Natural Language API to extract information about a user's tweets, we can analyze their stance online. Based on their scores, we can classify this user or tag to be generally positive, negative, neutral, or mixed online.
 
 With this information, we would be able to attempt to extrapolate different aspects of the users given their information. For example, if one user was overly negative towards their current state of government, AI could determine their position in the political compass given enough training to classify what is left or right.
 
@@ -29,11 +29,11 @@ The following is required to host your own server:
 
 As the data is sent back to the client, it will display the user's general sentiment score and details in regards to it.
 
-# DISCLAIMER: The analysis being performed DOES NOT confirm any bias or views towards political issues or current events.
+# DISCLAIMER: The analysis being performed DOES NOT confirm any bias or views towards political issues or current events and they DO NOT accurately represent any user/hashtag position or thoughts in their entirety.
 
 ### CNN / FOX
 
-CNN and Fox News cover current events in different bias, liberal and conservative respectively. As popular events are covered. Both sides cover the same topic, but uses different viewpoints. This specific part of the app uses a NLP algorithm to determine the significant sections of news articles that are scraped and inspected. These summaries are then displayed to the user to create a side by side comparison and set a stance for themselves.
+It is not uncommon for traditional news sites like CNN and Fox News to cover the same event with different biases. It can be difficult at times to see the subtle differences between them. How they may frame certain events, or how they analyze them. This specific part of the app allows users to scrape CNN / Fox News articles and provide a side by side summary (created by an NLP algorithm) of how these news sites talk about issues for the user to read. Allowing the users to see different issues in different lights and decide where they stand on it. 
 
 ### Local Setup
 
