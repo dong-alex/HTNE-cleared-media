@@ -13,8 +13,6 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -65,7 +63,7 @@ function LinearProgressWithLabel(props) {
   );
 }
 
-export default function CircularIntegration() {
+export default function ResultField() {
   const classes = useStyles();
 
   return (
