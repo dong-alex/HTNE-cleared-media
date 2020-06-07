@@ -1,6 +1,7 @@
-from flask import Flask, jsonify
+from flask import Flask, request, jsonify
 from twitterClient import TwitterClient
 from googleClassifier import GoogleNLClient
+from scraperClient import ScraperClient
 from flask_cors import CORS
 
 # from classifierClient import ClassifierClient
@@ -9,7 +10,7 @@ app = Flask(__name__)
 CORS(app)
 client = TwitterClient()
 NLPClient = GoogleNLClient()
-
+WebReader = ScraperClient()
 # classifier = ClassifierClient()
 
 # with open("test.json", "r") as fp:
@@ -85,6 +86,24 @@ def tweetsByTag(twitterTag=None):
     # result = classifier.classify(textContent)
     # print(result)
     # return jsonify(result)
+
+
+@app.route("/news", methods=["POST"])
+def getNewsSummary():
+    params = request.get_json()
+    url = params["url"]
+
+    if not url:
+        return jsonify({"message": "No url found. Please try again."})
+
+    summary = WebReader.runArticleSummary(url)
+
+    if summary == "":
+        return jsonify(
+            {"message": "Article was not from CNN/Fox or there was an error."}
+        )
+
+    return jsonify(summary)
 
 
 if __name__ == "__main__":
