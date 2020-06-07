@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { green, yellow, } from '@material-ui/core/colors';
+import { green, yellow, red} from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import CheckIcon from '@material-ui/icons/Check';
@@ -27,8 +27,16 @@ const useStyles = makeStyles((theme) => ({
   score: {
     width: "300px"
   },
-  happy: {
+  pos: {
     color: green[500],
+    backgroundColor: '#FFFFFF',
+  },
+  neg: {
+    color: red[500],
+    backgroundColor: '#FFFFFF',
+  },
+  neu: {
+    color: yellow[500],
     backgroundColor: '#FFFFFF',
   }
 }));
@@ -51,7 +59,7 @@ function LinearProgressWithLabel(props) {
         <ColorLinearProgress variant="determinate" {...props} />
       </Box>
       <Box minWidth={35}>
-        <Typography variant="body2" color="textSecondary">{`Mixed`}</Typography>
+        <Typography className={classes.pos} variant="body2">{`Mixed`}</Typography>
       </Box>
     </Box>
   );
@@ -63,7 +71,7 @@ export default function CircularIntegration() {
   return (
     <div className={classes.root}>
       <div className={classes.wrapper}>
-        <Avatar className={classes.happy}><InsertEmoticonIcon /></Avatar>
+        <Avatar className={classes.pos}><InsertEmoticonIcon /></Avatar>
       </div>
       <div className={classes.score}>
       <LinearProgressWithLabel value={10} />
