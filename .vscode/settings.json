@@ -1,0 +1,9 @@
+{
+	"python.linting.pylintArgs": ["--init-hook", "--errors-only"],
+	"python.linting.flake8Args": ["--ignore=E501"],
+	"python.formatting.provider": "black",
+	"python.pythonPath": "/usr/local/opt/python/bin/python3.7",
+	"python.linting.pylintEnabled": false,
+	"python.linting.flake8Enabled": true,
+	"python.linting.enabled": true
+}

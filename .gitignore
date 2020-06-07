@@ -257,3 +257,11 @@ cython_debug/
 
 # others
 corpus.csv
+
+ska.json
+processed_acl/
+nbc.sav
+app.yaml
+
+# would take out but to simplify between team members
+# .vscode/
