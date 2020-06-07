@@ -55,18 +55,12 @@ const TwitterPage = (props) => {
 	return (
 		<Layout>
 			<TwitterSearchField onSubmit={handleSubmit} />
-			{/* {documentAnalysis && (
-				<>
-					<Paper>{documentAnalysis.document_magnitude}</Paper>
-					<Paper>{documentAnalysis.document_score}</Paper>
-				</>
-			)} */}
-			
-			{documentAnalysis && <TwitterSentiment score={documentAnalysis.document_score} magnitude={documentAnalysis.document_magnitude} />}
-			
-			{/*
-			<TwitterSentiment score={0} magnitude={4} />
-			*/}
+			{documentAnalysis && (
+				<TwitterSentiment
+					score={documentAnalysis.document_sentiment}
+					magnitude={documentAnalysis.document_magnitude}
+				/>
+			)}
 			{twitterUser && <UserCard user={twitterUser} />}
 		</Layout>
 	);
