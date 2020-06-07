@@ -46,21 +46,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-
-const ColorLinearProgress = withStyles({
-  colorPrimary: {
-    backgroundColor: green[300],
-  },
-  barColorPrimary: {
-    backgroundColor: green[500],
-  },
-})(LinearProgress);
-
-
 const ResultField = ({ score, magnitude }) => {
 
   const classes = useStyles();
+
+  const colorBarScheme = {
+    pos: green,
+    neu: grey,
+    neg: red,
+    mix: yellow
+  }
 
   const iconDisplay = {
     pos: <Avatar className={classes.pos}><SentimentVerySatisfiedIcon /></Avatar>,
@@ -89,7 +84,14 @@ const ResultField = ({ score, magnitude }) => {
     finalResult = "neg"
   }
 
-  console.log("Did I even get here???")
+  const ColorLinearProgress = withStyles({
+    colorPrimary: {
+      backgroundColor: colorBarScheme[finalResult][300],
+    },
+    barColorPrimary: {
+      backgroundColor: colorBarScheme[finalResult][500],
+    },
+  })(LinearProgress);
 
   return (
     <div className={classes.root}>
