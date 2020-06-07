@@ -52,7 +52,7 @@ class GoogleNLClient(object):
             content=cleanTweetContent, type=enums.Document.Type.PLAIN_TEXT
         )
 
-        response = client.analyze_entity_sentiment(document=document)
+        response = client.analyze_sentiment(document=document)
 
         # Sent to logger - but not needed
         # for entity in response.entities:
@@ -83,8 +83,12 @@ class GoogleNLClient(object):
         #             )
         #         )
 
+        payload = {
+            "document_sentiment": response.document_sentiment.score,
+            "document_magnitude": response.document_sentiment.magnitude,
+        }
         # more analysis ? word clouding
-        return MessageToJson(response)
+        return payload
 
     def cleanTweets(self, tweetTexts):
         textContent = ""

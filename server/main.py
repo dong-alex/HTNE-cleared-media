@@ -1,13 +1,12 @@
 from flask import Flask, jsonify
 from twitterClient import TwitterClient
 from googleClassifier import GoogleNLClient
+from flask_cors import CORS
 
 # from classifierClient import ClassifierClient
 
-import json
-
 app = Flask(__name__)
-
+CORS(app)
 client = TwitterClient()
 NLPClient = GoogleNLClient()
 
@@ -23,7 +22,8 @@ def root():
     return "Hello World"
 
 
-@app.route("/tweets/plain/<name>")
+# should not be using this.
+@app.route("/tweets/plain/<name>", methods=["GET"])
 def getTweets(name=None):
     if not name:
         return jsonify({"message": "No twitter username found. Please try again."})
@@ -32,12 +32,14 @@ def getTweets(name=None):
     # check with user - returns array of info objects
     tweets, user = client.getTweetsFromUser(name)
 
-    if not tweets:
-        return jsonify({"message": "No tweets found for the user"})
+    print("Found tweets for the corresponding user", user)
+    if not tweets or user:
+        return jsonify({"message": "No tweets found or no user found."})
+
     return jsonify(tweets=tweets, user=user)
 
 
-@app.route("/tweets/user/<twitterUserName>")
+@app.route("/tweets/user/<twitterUserName>", methods=["GET"])
 def tweetsByName(twitterUserName=None):
     if not twitterUserName:
         return jsonify({"message": "No twitter username found. Please try again."})
@@ -46,24 +48,23 @@ def tweetsByName(twitterUserName=None):
     # check with user - returns array of info objects
     tweets, user = client.getTweetsFromUser(twitterUserName)
 
-    if not tweets:
+    print("Found tweets for the corresponding user", user)
+    if not tweets or not user:
         return jsonify({"message": "No tweets found for the user"})
 
     # pass just the content into the tweets and return the rest
     textContent = []
     for tweet in tweets:
-        print(tweet["content"])
-        print("------------------------------------------------")
         textContent.append(tweet["content"])
 
     nlpResponse = NLPClient.analyzeTweets(textContent)
     # result = classifier.classify(textContent)
     # print(result)
     # return jsonify(result)
-    return jsonify(analysis=nlpResponse, details=tweets)
+    return jsonify(analysis=nlpResponse, user=user)
 
 
-@app.route("/tweets/tag/<twitterTag>")
+@app.route("/tweets/tag/<twitterTag>", methods=["GET"])
 def tweetsByTag(twitterTag=None):
     if not twitterTag:
         return jsonify({"message": "No twitter tag found. Please try again."})
@@ -77,13 +78,10 @@ def tweetsByTag(twitterTag=None):
     # pass just the content into the tweets and return the rest
     textContent = []
     for tweet in tweets:
-        print(tweet["content"])
-        print("------------------------------------------------")
         textContent.append(tweet["content"])
-
     nlpResponse = NLPClient.analyzeTweets(textContent)
 
-    return jsonify(analysis=nlpResponse, details=tweets)
+    return jsonify(analysis=nlpResponse)
     # result = classifier.classify(textContent)
     # print(result)
     # return jsonify(result)
