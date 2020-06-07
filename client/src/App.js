@@ -1,10 +1,5 @@
 import React, { useState, useRef } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import { ThemeProvider } from "styled-components";
-import { useOnClickOutside } from "./hooks";
-import { GlobalStyles } from "./global";
-import { theme } from "./theme";
-import { Sidebar, Menu } from "./components";
 import LandingPage from "./components/pages/LandingPage";
 import TwitterPage from "./components/pages/TwitterPage";
 import NewsPage from "./components/pages/NewsPage";
