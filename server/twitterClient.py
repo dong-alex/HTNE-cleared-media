@@ -62,18 +62,19 @@ class TwitterClient(object):
         query = str(tag) + " -filter:retweets"
 
         try:
-            tweets = tweepy.Cursor(self.api.search, q=query, lang="en").items(numTweets)
-            print("Found the tweets")
-
-            # no tweets found - tag is new or DNE
-            if not tweets:
-                return None
-
             results = []
-            for tweet in tweets:
-                print(tweet)
-                tweetContent, userIgnoreContent = constructJsonTweet(tweet)
-                results.append(constructJsonTweet(tweetContent))
+
+            for status in tweepy.Cursor(self.api.search, q=query, lang="en").items(
+                numTweets
+            ):
+                results.append(
+                    {
+                        "id": status.id_str,
+                        "content": status.text,
+                        "created_at": status.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+                    }
+                )
+
             return results
 
         except Exception as ex:
