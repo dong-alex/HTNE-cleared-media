@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { green, yellow, red, grey} from '@material-ui/core/colors';
+import { green, amber, red, grey} from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import CheckIcon from '@material-ui/icons/Check';
@@ -29,24 +29,27 @@ const useStyles = makeStyles((theme) => ({
     width: "300px"
   },
   pos: {
-    color: green[500],
+    color: green[600],
     backgroundColor: '#FFFFFF',
   },
   neg: {
-    color: red[500],
+    color: red[600],
     backgroundColor: '#FFFFFF',
   },
   neu: {
-    color: grey[500],
+    color: grey[600],
     backgroundColor: '#FFFFFF',
   },
   mix: {
-    color: yellow[500],
+    color: amber[600],
     backgroundColor: '#FFFFFF',
   }
 }));
 
 const ResultField = ({ score, magnitude }) => {
+
+  console.log(typeof(score))
+  console.log(typeof(magnitude))
 
   const classes = useStyles();
 
@@ -54,7 +57,7 @@ const ResultField = ({ score, magnitude }) => {
     pos: green,
     neu: grey,
     neg: red,
-    mix: yellow
+    mix: amber
   }
 
   const iconDisplay = {
@@ -72,23 +75,23 @@ const ResultField = ({ score, magnitude }) => {
   }
 
   var finalResult
-  var convertScore = Math.round(score * 100) / 100
-  
-  if (convertScore <= 0.2 && convertScore >= -0.2 && magnitude <= 4){
+  var convertScore = Number(Math.round(score * 100) / 100).toFixed(2)
+
+  if (convertScore < 0.3 && convertScore > -0.3 && magnitude >= 3){
     finalResult = "mix"
-  } else if (convertScore <= 0.2 && convertScore >= -0.2){
+  } else if (convertScore < 0.3 && convertScore > -0.3){
     finalResult = "neu"
-  } else if (convertScore > 0.2) {
+  } else if (convertScore >= 0.3) {
     finalResult = "pos"
   } else {
     finalResult = "neg"
   }
 
-  var displayBar = convertScore !== 0 ? 50 + ((convertScore/2) * 100) : 50
+  var displayBar = convertScore != 0 ? (50 + ((convertScore/2) * 100)) : 50
 
   const ColorLinearProgress = withStyles({
     colorPrimary: {
-      backgroundColor: colorBarScheme[finalResult][400],
+      backgroundColor: colorBarScheme[finalResult][300],
     },
     barColorPrimary: {
       backgroundColor: colorBarScheme[finalResult][700],
