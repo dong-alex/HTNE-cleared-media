@@ -28,7 +28,8 @@ class TwitterClient(object):
     # get only the tweets made by the screen name - used as user id
     def getTweetsFromUser(self, screenName, count=40):
         try:
-            statuses = tweepy.Cursor(
+            results = []
+            for tweet in tweepy.Cursor(
                 self.api.user_timeline,
                 screen_name=screenName,
                 count=count,
@@ -37,14 +38,8 @@ class TwitterClient(object):
                 exclude_replies=True,
                 contributor_details=False,
                 include_entities=False,
-            ).items(200)
-            # no tweets found - user is new or DNE | user DNE
-            if not statuses:
-                print("Was not able to get statuses and/or user.")
-                return None, None
+            ).items(200):
 
-            results = []
-            for tweet in statuses:
                 tweetContent, userContent = constructJsonTweet(tweet)
 
                 # skip retweets - query will not bs used in user_timeline - save words
@@ -85,19 +80,8 @@ class TwitterClient(object):
 
 def constructJsonTweet(tweet):
 
-    user = None
-
-    if "user" in tweet:
-        description = tweet.user.description if tweet.user.description else ""
-        location = tweet.user.location if tweet.user.location else ""
-        user = {
-            "user_id": tweet.user.id_str,
-            "user_name": tweet.user.name,
-            "screen_name": tweet.user.screen_name,
-            "description": description,
-            "location": location,
-            "user_image_url": tweet.user.profile_image_url_https,
-        }
+    description = tweet.user.description if tweet.user.description else ""
+    location = tweet.user.location if tweet.user.location else ""
     # tweetUser = User(
     #     tweet.user.id_str,
     #     tweet.user.name,
@@ -114,7 +98,14 @@ def constructJsonTweet(tweet):
             "content": tweet.text,
             "created_at": tweet.created_at.strftime("%Y-%m-%d %H:%M:%S"),
         },
-        user,
+        {
+            "user_id": tweet.user.id_str,
+            "user_name": tweet.user.name,
+            "screen_name": tweet.user.screen_name,
+            "description": description,
+            "location": location,
+            "user_image_url": tweet.user.profile_image_url_https,
+        },
     )
 
 
