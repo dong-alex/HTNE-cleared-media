@@ -92,7 +92,8 @@ class ScraperClient(object):
         if "cnn.com" in article:
             paragraphs = article_parsed.find_all("div", "zn-body__paragraph")
         elif "foxnews.com" in article:
-            paragraphs = article_parsed.find_all("p")
+            pageContent = article_parsed.find("div", "article-content")
+            paragraphs = pageContent.find_all("p")
         else:
             return ""
 
