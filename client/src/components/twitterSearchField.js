@@ -16,9 +16,10 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import Grid from "@material-ui/core/Grid";
-
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+import Demo from './linearprogess';
 
 const useStyles = makeStyles((theme) => ({
 	submitButton: {
@@ -181,6 +182,7 @@ const TwitterSearchField = ({ onSubmit }) => {
 					{loading ? <CircularProgress /> : "Analyze"}
 				</Button>
 			</FormControl>
+			<Demo />
 		</MuiThemeProvider>
 	);
 };
