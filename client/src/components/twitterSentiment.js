@@ -37,11 +37,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#FFFFFF',
   },
   neu: {
-    color: yellow[500],
+    color: grey[500],
     backgroundColor: '#FFFFFF',
   },
   mix: {
-    color: grey[500],
+    color: yellow[500],
     backgroundColor: '#FFFFFF',
   }
 }));
@@ -72,24 +72,26 @@ const ResultField = ({ score, magnitude }) => {
   }
 
   var finalResult
-  var displayScore = Math.round(score * 100) / 100
+  var convertScore = Math.round(score * 100) / 100
   
-  if (displayScore <= 0.2 && displayScore >= -0.2 && magnitude <= 4){
+  if (convertScore <= 0.2 && convertScore >= -0.2 && magnitude <= 4){
     finalResult = "mix"
-  } else if (displayScore <= 0.2 && displayScore >= -0.2){
+  } else if (convertScore <= 0.2 && convertScore >= -0.2){
     finalResult = "neu"
-  } else if (displayScore > 0.2) {
+  } else if (convertScore > 0.2) {
     finalResult = "pos"
   } else {
     finalResult = "neg"
   }
 
+  var displayBar = convertScore !== 0 ? 50 + ((convertScore/2) * 100) : 50
+
   const ColorLinearProgress = withStyles({
     colorPrimary: {
-      backgroundColor: colorBarScheme[finalResult][300],
+      backgroundColor: colorBarScheme[finalResult][400],
     },
     barColorPrimary: {
-      backgroundColor: colorBarScheme[finalResult][500],
+      backgroundColor: colorBarScheme[finalResult][700],
     },
   })(LinearProgress);
 
@@ -101,7 +103,7 @@ const ResultField = ({ score, magnitude }) => {
       <div className={classes.score}>
         <Box display="flex" alignItems="center">
         <Box width="100%" mr={1}>
-          <ColorLinearProgress variant="determinate" value={displayScore} />
+          <ColorLinearProgress variant="determinate" value={displayBar} />
         </Box>
         <Box minWidth={35}>
           {textDisplay[finalResult]}
