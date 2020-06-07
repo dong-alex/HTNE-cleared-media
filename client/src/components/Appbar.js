@@ -41,6 +41,9 @@ export default function ButtonAppBar() {
 					<Button component={Link} to='/twitter' color='inherit'>
 						Twitter
 					</Button>
+					<Button component={Link} to='/news' color='inherit'>
+						News
+					</Button>
 				</Toolbar>
 			</AppBar>
 		</div>

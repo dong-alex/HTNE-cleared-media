@@ -11,6 +11,7 @@ let theme = createMuiTheme({
 	typography: {
 		h1: {
 			fontSize: "3rem",
+			textAlign: "center",
 		},
 	},
 });
