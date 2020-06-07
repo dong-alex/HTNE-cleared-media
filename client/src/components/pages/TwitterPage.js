@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Layout from "../layout";
 import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
 import TwitterSearchField from "../twitterSearchField";
 import axios from "axios";
+import UserCard from "../userCard";
 
 const useStyles = makeStyles((theme) => ({
 	submitButton: {
@@ -13,8 +15,16 @@ const useStyles = makeStyles((theme) => ({
 
 const TwitterPage = (props) => {
 	const classes = useStyles();
-	const [sentiment, setSentiment] = useState(0);
-	const [twitterUser, setTwitterUser] = useState(null);
+	const [documentAnalysis, setDocumentAnalysis] = useState(null);
+	const [twitterUser, setTwitterUser] = useState({
+		description: "45th President of the United States of America🇺🇸",
+		location: "Washington, DC",
+		screen_name: "realDonaldTrump",
+		user_id: "25073877",
+		user_image_url:
+			"https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_normal.jpg",
+		user_name: "Donald J. Trump",
+	});
 
 	const handleSubmit = async (submission, type) => {
 		try {
@@ -32,6 +42,7 @@ const TwitterPage = (props) => {
 			}
 
 			setTwitterUser(user);
+			setDocumentAnalysis(analysis);
 
 			return true;
 		} catch (err) {
@@ -43,6 +54,13 @@ const TwitterPage = (props) => {
 	return (
 		<Layout>
 			<TwitterSearchField onSubmit={handleSubmit} />
+			{/* {documentAnalysis && (
+				<>
+					<Paper>{documentAnalysis.document_magnitude}</Paper>
+					<Paper>{documentAnalysis.document_score}</Paper>
+				</>
+			)} */}
+			{twitterUser && <UserCard user={twitterUser} />}
 		</Layout>
 	);
 };

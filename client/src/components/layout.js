@@ -1,9 +1,14 @@
 import React, { useState, useRef } from "react";
 import { Sidebar, Menu } from "./";
 import Appbar from "./Appbar";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import {
+	makeStyles,
+	withStyles,
+	ThemeProvider,
+} from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import theme from "../theme";
 
 const useStyles = makeStyles((theme) => ({
 	root: {},
@@ -26,11 +31,11 @@ const Layout = ({ children }) => {
 		// 	<Menu open={open} setOpen={setOpen} />
 		// 	<Container>{children}</Container>
 		// </div>
-		<>
+		<ThemeProvider theme={theme}>
 			<CssBaseline />
 			<Appbar className={classes.bar} />
 			<Container className={classes.container}>{children}</Container>
-		</>
+		</ThemeProvider>
 	);
 };
 
