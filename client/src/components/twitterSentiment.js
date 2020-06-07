@@ -2,16 +2,19 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { green, yellow, red} from '@material-ui/core/colors';
+import { green, yellow, red, grey} from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import CheckIcon from '@material-ui/icons/Check';
 import SaveIcon from '@material-ui/icons/Save';
 import Avatar from '@material-ui/core/Avatar';
-import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+
+import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
+import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,8 +39,14 @@ const useStyles = makeStyles((theme) => ({
   neu: {
     color: yellow[500],
     backgroundColor: '#FFFFFF',
+  },
+  mix: {
+    color: grey[500],
+    backgroundColor: '#FFFFFF',
   }
 }));
+
+
 
 const ColorLinearProgress = withStyles({
   colorPrimary: {
@@ -48,32 +57,57 @@ const ColorLinearProgress = withStyles({
   },
 })(LinearProgress);
 
-function LinearProgressWithLabel(props) {
+
+const ResultField = ({ score, magnitude }) => {
+
   const classes = useStyles();
 
-  return (
-    <Box display="flex" alignItems="center">
-      <Box width="100%" mr={1}>
-        <ColorLinearProgress variant="determinate" {...props} />
-      </Box>
-      <Box minWidth={35}>
-        <Typography className={classes.pos} variant="body2">{`Mixed`}</Typography>
-      </Box>
-    </Box>
-  );
-}
+  const iconDisplay = {
+    pos: <Avatar className={classes.pos}><SentimentVerySatisfiedIcon /></Avatar>,
+    neu: <Avatar className={classes.neu}><SentimentSatisfiedIcon /></Avatar>,
+    neg: <Avatar className={classes.neg}><SentimentVeryDissatisfiedIcon /></Avatar>,
+    mix: <Avatar className={classes.mix}><SentimentSatisfiedIcon /></Avatar>
+  }
+  
+  const textDisplay = {
+    pos: <Typography className={classes.pos} variant="body2">Positive</Typography>,
+    neu: <Typography className={classes.neu} variant="body2">Neutral</Typography>,
+    neg: <Typography className={classes.neg} variant="body2">Negative</Typography>,
+    mix: <Typography className={classes.mix} variant="body2">Mixed</Typography>
+  }
 
-export default function ResultField() {
-  const classes = useStyles();
+  var finalResult
+  var displayScore = Math.round(score * 100) / 100
+  
+  if (displayScore <= 0.2 && displayScore >= -0.2 && magnitude <= 4){
+    finalResult = "mix"
+  } else if (displayScore <= 0.2 && displayScore >= -0.2){
+    finalResult = "neu"
+  } else if (displayScore > 0.2) {
+    finalResult = "pos"
+  } else {
+    finalResult = "neg"
+  }
+
+  console.log("Did I even get here???")
 
   return (
     <div className={classes.root}>
       <div className={classes.wrapper}>
-        <Avatar className={classes.pos}><InsertEmoticonIcon /></Avatar>
+        {iconDisplay[finalResult]}
       </div>
       <div className={classes.score}>
-      <LinearProgressWithLabel value={10} />
-    </div>
+        <Box display="flex" alignItems="center">
+        <Box width="100%" mr={1}>
+          <ColorLinearProgress variant="determinate" value={displayScore} />
+        </Box>
+        <Box minWidth={35}>
+          {textDisplay[finalResult]}
+        </Box>
+        </Box>
+      </div>
     </div>
   );
 }
+
+export default ResultField;

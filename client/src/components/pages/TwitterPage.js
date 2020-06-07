@@ -61,8 +61,8 @@ const TwitterPage = (props) => {
 					<Paper>{documentAnalysis.document_score}</Paper>
 				</>
 			)} */}
-			<TwitterSentiment />
-			{twitterUser && <UserCard user={twitterUser} />}
+			
+			{twitterUser && <TwitterSentiment score={0} magnitude={0} /> && <UserCard user={twitterUser} />}
 		</Layout>
 	);
 };
